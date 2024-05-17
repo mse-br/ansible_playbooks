@@ -8,3 +8,12 @@
     - name: Retrieve Test Vault Credential
       debug: 
         msg: "{{ lookup('env', 'Teste') }}"
+
+    - name: Get all env variables
+      shell:
+        cmd: printenv
+      register: output
+
+    - name: Show env variables
+      debug:
+        msg: "{{ output }}"
