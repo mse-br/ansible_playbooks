@@ -9,6 +9,11 @@
 
 - hosts: localhost
   tasks:
+    - name: Print all groups
+      debug:
+        msg: "{{ item }}"
+      loop: "{{ groups.keys() | list }}"
+      
     - name: Print local
       debug:
         msg: "Item is {{ item }}"
