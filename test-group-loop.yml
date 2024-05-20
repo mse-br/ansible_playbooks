@@ -11,5 +11,5 @@
   tasks:
     - name: Print local
       debug:
-        msg: "Host is {{ hostvars[item] }}"
+        msg: "Item is {{ item }}"
       loop: "{{ groups['Patch Management Lab Activated'] }}"
