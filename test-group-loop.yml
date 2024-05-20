@@ -1,0 +1,15 @@
+---
+- hosts: all 
+  tasks:
+    - name: Retrieve host hostname
+      shell: hostname
+      register: hostname_var
+      changed_when: False
+      when: ansible_os_family == "Debian"
+
+- hosts: localhost
+  tasks:
+    - name: Print local
+      debug:
+        msg: "Host is {{ hostvars[item] }}"
+      loop: "{{ groups['Patch Management Lab Activated'] }}"
