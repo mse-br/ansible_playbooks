@@ -16,5 +16,5 @@
       
     - name: Print local
       debug:
-        msg: "Item is {{ item }}"
+        msg: "Item is {{ hostvars[item] }}"
       loop: "{{ groups['all'] }}"
