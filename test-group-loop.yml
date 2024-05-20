@@ -6,12 +6,7 @@
       register: hostname_var
       changed_when: False
       when: ansible_os_family == "Debian"
-
-    - name: Print all groups
-      debug:
-        msg: "{{ item }}"
-      loop: "{{ groups.keys() | list }}"
-
+      
 - hosts: localhost
   tasks:
     - name: Print all groups - local
@@ -22,4 +17,4 @@
     - name: Print local
       debug:
         msg: "Item is {{ item }}"
-      loop: "{{ groups['Patch Management Lab Activated'] }}"
+      loop: "{{ groups['all'] }}"
