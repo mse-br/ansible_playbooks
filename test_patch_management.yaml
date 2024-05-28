@@ -22,3 +22,9 @@
         that:
           - "apt_upgrades['stdout_lines'] | regex_search(';') == None"
         fail_msg: "Data contains unexpected semi-colon character which could be an attemptive of SQL injection."
+
+- hosts: localhost
+  tasks:
+    - name: Get host address
+      debug:
+        msg: "{{ lookup('env', 'HOST') }}"
