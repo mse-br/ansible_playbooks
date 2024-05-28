@@ -1,5 +1,5 @@
 ---
-- hosts: headnodes
+- hosts: all
   tasks:
     - name: Get remote hostname
       shell: hostname
@@ -10,6 +10,7 @@
         msg: "{{ remote_hostname }}"
 
 - hosts: localhost
+  become: no
   tasks:
     - name: Get local hostname
       shell: hostname
