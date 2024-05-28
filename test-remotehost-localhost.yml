@@ -1,0 +1,20 @@
+---
+- hosts: headnodes
+  tasks:
+    - name: Get remote hostname
+      shell: hostname
+      register: remote_hostname
+
+    - name: Print remote hostname
+      debug:
+        msg: "{{ remote_hostname }}"
+
+- hosts: localhost
+  tasks:
+    - name: Get local hostname
+      shell: hostname
+      register: local_hostname
+
+    - name: Print local hostname
+      debug:
+        msg: "{{ local_hostname }}"
