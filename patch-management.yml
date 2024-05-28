@@ -1,11 +1,9 @@
 ---
-- hosts: all
-  remote_user: devshell
+- hosts: all 
   tasks:
     - name: Update packages
       ansible.builtin.apt:
         update_cache: yes
-      become: true
       when: ansible_os_family == "Debian"
 
     - name: Retrieve pending updates
@@ -23,4 +21,24 @@
       assert:
         that:
           - "apt_upgrades['stdout_lines'] | regex_search(';') == None"
-        fail_msg: "Data contains semi-colon character which could be an attemptive of SQL injection."
+        fail_msg: "Data contains unexpected semi-colon character which could be an attemptive of SQL injection."
+
+- hosts: localhost
+  tasks:
+    - name: Insert packages updatable on patch_management database
+      postgresql_query:
+        login_host: "{{ lookup('env', 'HOST') }}"
+        login_user: "{{ lookup('env', 'USER') }}"
+        login_password: "{{ lookup('env', 'PASSWORD') }}"
+        port: "{{ lookup('env', 'PORT') }}"
+        db: "{{ lookup('env', 'DATABASE') }}"
+        query: INSERT INTO patch_management.raw_upgradable (configuration_item_sys_id, raw_upgradable) VALUES (%s, %s);
+        positional_args:
+          - "{{ hostvars[item]['sys_id'] }}"
+          - "{{ hostvars[item]['apt_upgrades']['stdout_lines'] }}"
+      loop: "{{ groups['all'] }}"
+      register: query_result
+
+    - name: Display insert result
+      debug:
+        var: query_result.statusmessage
