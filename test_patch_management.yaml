@@ -24,4 +24,4 @@
   tasks:
     - name: Get host address
       debug:
-        msg: "{{ lookup('env', 'HOST') }}"
+        msg: " Home: {{ lookup('env', 'HOME') }}"
