@@ -22,6 +22,10 @@
   become: no
   remote_user: admin
   tasks:
-    - name: Get host address
+    - name: Gather all facts
+      setup:
+        gather_subset: all
+  
+    - name: Print all environment variables
       debug:
-        msg: " Home: {{ lookup('env', 'HOME') }}"
+        var: ansible_env
