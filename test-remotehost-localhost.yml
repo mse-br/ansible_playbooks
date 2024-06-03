@@ -14,14 +14,14 @@
   vars_files:
    - vault_file_name_teste.yml
   tasks:
-    - name: Get local hostname
-      shell: hostname
-      register: local_hostname
+    # - name: Get local hostname
+    #   shell: hostname
+    #   register: local_hostname
 
-    - name: Print local hostname
-      debug:
-        msg: "{{ local_hostname }}"
-
+    # - name: Print local hostname
+    #   debug:
+    #     msg: "{{ local_hostname }}"
+# 
     - name: Show vault encrypted variables user
       debug: 
         msg: "{{ dba_user_name }}"
