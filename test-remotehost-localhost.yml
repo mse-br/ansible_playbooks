@@ -12,7 +12,7 @@
 - hosts: localhost
   become: no
   vars_files:
-   - vault_file_name_teste.yml
+   - /opt/ansible/secrets/vault_file_name_teste.yml
   tasks:
     # - name: Get local hostname
     #   shell: hostname
