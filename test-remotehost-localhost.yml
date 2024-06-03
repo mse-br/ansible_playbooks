@@ -1,14 +1,14 @@
 ---
-- hosts: all
-  tasks:
-    - name: Get remote hostname
-      shell: hostname
-      register: remote_hostname
+# - hosts: all
+#   tasks:
+#     - name: Get remote hostname
+#       shell: hostname
+#       register: remote_hostname
 
-    - name: Print remote hostname
-      debug:
-        msg: "{{ remote_hostname }}"
-
+#     - name: Print remote hostname
+#       debug:
+#         msg: "{{ remote_hostname }}"
+# 
 - hosts: localhost
   become: no
   vars_files:
