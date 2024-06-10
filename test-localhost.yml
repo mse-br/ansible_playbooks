@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  become: no
+  vars_files:
+  tasks:
+    - name: Get local hostname
+      shell: hostname
+      register: local_hostname
+
+    - name: Print local hostname
+      debug:
+        msg: "{{ local_hostname }}"
+        
+    - name: Get K8S secret information
+      community.kubernetes.k8s_info:
+        api_version: v1
+        kind: Secret
+        name: awx-secret
+        namespace: awx
+      register: secret_info
+
+    - name: Decode and print variable DB_HOST
+      debug:
+        msg: "{{ (secret_info.resources[0].data.DB_HOST | b64decode) }}"
