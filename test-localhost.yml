@@ -1,7 +1,6 @@
 ---
 - hosts: localhost
   become: no
-  vars_files:
   tasks:
     - name: Get K8S secret information
       kubernetes.core.k8s_info:
@@ -13,4 +12,4 @@
 
     - name: Decode and print variable DB_HOST
       debug:
-        msg: "{{ (secret_info.resources[0].data.DB_HOST | b64decode) }}"
+        msg: "{{ secret_info.resources[0] }}"
