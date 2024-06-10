@@ -12,7 +12,7 @@
         msg: "{{ local_hostname }}"
         
     - name: Get K8S secret information
-      community.kubernetes.k8s_info:
+      kubernetes.core.k8s_info:
         api_version: v1
         kind: Secret
         name: awx-secret
