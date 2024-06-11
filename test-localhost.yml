@@ -1,10 +1,22 @@
 ---
 - hosts: localhost
-  become: no
   tasks:
-      - name: Print template variables
-        debug:
-          msg: "{{ DB_HOST }}"
+    - name: Ler secret do Kubernetes
+      shell: |
+        kubectl get secret awx-secret -n awx -o jsonpath='{.data.DB_HOST}' | base64 --decode
+      register: secret_data
+
+    - name: Debug secret data
+      debug:
+        msg: "O secret é {{ secret_data.stdout }}"
+
+# ---
+# - hosts: localhost
+#   become: no
+#   tasks:
+#       - name: Print template variables
+#         debug:
+#           msg: "{{ DB_HOST }}"
 
     # - name: Get K8S secret information
     #   kubernetes.core.k8s_info:
