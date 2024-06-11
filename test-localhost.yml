@@ -4,7 +4,7 @@
   tasks:
       - name: Print template variables
         debug:
-          msg: "{{ hostvars['DB_HOST'] }}"
+          msg: "{{ DB_HOST }}"
 
     # - name: Get K8S secret information
     #   kubernetes.core.k8s_info:
