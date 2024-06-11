@@ -2,14 +2,18 @@
 - hosts: localhost
   become: no
   tasks:
-    - name: Get K8S secret information
-      kubernetes.core.k8s_info:
-        api_version: v1
-        kind: Secret
-        name: awx-secret
-        namespace: awx
-      register: secret_info
+      - name: Print template variables
+        debug:
+          msg: {{ hostvars['DB_HOST'] }}
 
-    - name: Decode and print variable DB_HOST
-      debug:
-        msg: "{{ secret_info.resources[0] }}"
+    # - name: Get K8S secret information
+    #   kubernetes.core.k8s_info:
+    #     api_version: v1
+    #     kind: Secret
+    #     name: awx-secret
+    #     namespace: awx
+    #   register: secret_info
+
+    # - name: Decode and print variable DB_HOST
+    #   debug:
+    #     msg: "{{ secret_info.resources[0] }}"
