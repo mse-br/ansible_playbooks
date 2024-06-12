@@ -7,7 +7,7 @@
        
    - name: Extract something secrets from Secret Manager
      debug:
-       msg: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1', access_key={{ ACCESS_KEY | b64decode }}, secret_key={{ SECRET_KEY | b64decode }}) }}"
+       msg: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1', access_key=ACCESS_KEY | b64decode, secret_key=SECRET_KEY | b64decode) }}"
 
 # ---
 # - hosts: localhost
