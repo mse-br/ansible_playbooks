@@ -1,10 +1,13 @@
 ---
 - hosts: localhost
-  
   tasks:
+    - name: Test - Print access key
+     debug:
+       msg: "{{ ACCESS_KEY }}"
+       
    - name: Extract something secrets from Secret Manager
      debug:
-       msg: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1')}}"
+       msg: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1', access_key=ACCESS_KEY, secret_key=SECRET_KEY)  }}"
 
 # ---
 # - hosts: localhost
