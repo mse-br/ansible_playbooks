@@ -1,9 +1,10 @@
 ---
 - hosts: localhost
+  
   tasks:
    - name: Extract something secrets from Secret Manager
      debug:
-       msg: "{{ lookup('aws_secret', 'dev/some-secrets')}}"
+       msg: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1')}}"
 
 # ---
 # - hosts: localhost
