@@ -1,5 +1,7 @@
 ---
 - hosts: all 
+  vars:
+    secret: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
   tasks:
     - name: Update packages
       ansible.builtin.apt:
@@ -27,11 +29,11 @@
   tasks:
     - name: Insert packages updatable on patch_management database
       postgresql_query:
-        login_host: "{{ lookup('env', 'HOST') }}"
-        login_user: "{{ lookup('env', 'USER') }}"
-        login_password: "{{ lookup('env', 'PASSWORD') }}"
-        port: "{{ lookup('env', 'PORT') }}"
-        db: "{{ lookup('env', 'DATABASE') }}"
+        login_host: "{{ secret['DB_HOST'] }}"
+        login_user: "{{ secret['DB_USER'] }}"
+        login_password: "{{ secret['DB_PASS'] }}"
+        port: "{{ secret['DB_PORT'] }}"
+        db: "{{ secret['DB_NAME'] }}"
         query: INSERT INTO patch_management.raw_upgradable (configuration_item_sys_id, raw_upgradable) VALUES (%s, %s);
         positional_args:
           - "{{ hostvars[item]['sys_id'] }}"
