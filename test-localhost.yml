@@ -1,26 +1,17 @@
 ---
 - hosts: localhost
   tasks:    
-   - name: Extract something secrets from Secret Manager
+   # - name: Extract something secrets from Secret Manager
+   #   debug:
+   #     msg: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
+  - name: Extract Secret
+       set_fact:
+         secret: "{{ lookup('aws_secret', 'UAT/SECRET', region='us-east-2') }}"
+
+  - name: Show secret
      debug:
-       msg: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
+       msg: "{{ secret }}"
 
-# ---
-# - hosts: localhost
-#   become: no
-#   tasks:
-#       - name: Print template variables
-#         debug:
-#           msg: "{{ DB_HOST }}"
-
-    # - name: Get K8S secret information
-    #   kubernetes.core.k8s_info:
-    #     api_version: v1
-    #     kind: Secret
-    #     name: awx-secret
-    #     namespace: awx
-    #   register: secret_info
-
-    # - name: Decode and print variable DB_HOST
-    #   debug:
-    #     msg: "{{ secret_info.resources[0] }}"
+  - name: Show unique secret
+     debug:
+       msg: "{{ secret['DB_NAME'] }}"
