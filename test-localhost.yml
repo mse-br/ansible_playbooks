@@ -1,14 +1,9 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Ler secret do Kubernetes
-      shell: |
-        kubectl get secret awx-secret -n awx -o jsonpath='{.data.DB_HOST}' | base64 --decode
-      register: secret_data
-
-    - name: Debug secret data
-      debug:
-        msg: "O secret é {{ secret_data.stdout }}"
+   - name: Extract something secrets from Secret Manager
+     debug:
+       msg: "{{ lookup('aws_secret', 'dev/some-secrets')}}"
 
 # ---
 # - hosts: localhost
