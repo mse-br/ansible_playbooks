@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   tasks:
-    - name: Test - Print access key
+   - name: Test Print access key
      debug:
        msg: "{{ ACCESS_KEY }}"
        
