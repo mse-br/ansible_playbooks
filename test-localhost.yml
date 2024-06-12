@@ -1,17 +1,12 @@
 ---
 - hosts: localhost
+  vars:
+    secret: "{{ lookup('aws_secret', 'UAT/SECRET', region='us-east-2') }}"
   tasks:    
-   # - name: Extract something secrets from Secret Manager
-   #   debug:
-   #     msg: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
-  - name: Extract Secret
-       set_fact:
-         secret: "{{ lookup('aws_secret', 'UAT/SECRET', region='us-east-2') }}"
-
   - name: Show secret
-     debug:
-       msg: "{{ secret }}"
+    debug:
+      msg: "{{ secret }}"
 
   - name: Show unique secret
-     debug:
-       msg: "{{ secret['DB_NAME'] }}"
+    debug:
+      msg: "{{ secret['DB_NAME'] }}"
