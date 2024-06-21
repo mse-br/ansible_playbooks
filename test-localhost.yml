@@ -11,6 +11,10 @@
     debug:
       msg: '{{ collection_list.stdout_lines }}'
 
+  - name: Install psycopg 
+    pip:
+      name: psycopg2-binary==2.9.9
+
   - name: Getting local python modules
     shell:
       cmd: pip list
