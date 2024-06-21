@@ -4,6 +4,3 @@ collections:
   - name: community.postgresql
     version: 3.4.1
     source: https://galaxy.ansible.com
-
-# pip:
-#   - name: psycopg2-binary==2.9.9
