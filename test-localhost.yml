@@ -10,3 +10,12 @@
   - name: Printing collection
     debug:
       msg: '{{ collection_list.stdout_lines }}'
+
+  - name: Getting local python modules
+    shell:
+      cmd: pip list
+    register: python_list
+
+  - name: Printing collection
+    debug:
+      msg: '{{ python_list.stdout_lines }}'
