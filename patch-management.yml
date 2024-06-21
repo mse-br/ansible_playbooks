@@ -1,7 +1,5 @@
 ---
 - hosts: all 
-  vars:
-    secret: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
   tasks:
     - name: Update packages
       ansible.builtin.apt:
@@ -31,6 +29,10 @@
 
 - hosts: localhost
   become: no
+  vars:
+    secret: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
+  tag:
+  - update_database
   tasks:
     - name: Insert packages updatable on patch_management database
       postgresql_query:
