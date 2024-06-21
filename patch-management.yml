@@ -7,6 +7,8 @@
       ansible.builtin.apt:
         update_cache: yes
       when: ansible_os_family == "Debian"
+      tags:
+      - update_packages
 
     - name: Retrieve pending updates
       shell: apt list --upgradable
@@ -18,6 +20,8 @@
       debug:
         msg: "{{ apt_upgrades.stdout_lines }}"
       when: ansible_os_family == "Debian"
+      tags:
+      - display_packages
 
     - name: Check if data is safe
       assert:
