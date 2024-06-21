@@ -40,10 +40,10 @@
     - name: Insert packages updatable on patch_management database
       postgresql_query:
         login_host: "{{ secret['DB_HOST'] }}"
-        login_user: "{{ secret['DE_USER'] }}"
+        login_user: "{{ secret['DB_USER'] }}"
         login_password: "{{ secret['DB_PASS'] }}"
-        port: "{{ secret['DB_PORT '] }}"
-        db: events
+        port: "{{ secret['DB_PORT'] }}"
+        db: "{{ secret['DB_NAME'] }}"
         query: INSERT INTO patch_management.raw_upgradable (configuration_item_sys_id, raw_upgradable) VALUES (%s, %s);
         positional_args:
           - "{{ hostvars[item]['sys_id'] }}"
