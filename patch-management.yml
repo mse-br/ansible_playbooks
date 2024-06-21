@@ -36,7 +36,7 @@
     - name: Insert packages updatable on patch_management database
       postgresql_query:
         login_host: "{{ secret['DB_HOST'] }}"
-        login_user: "{{ secret['DB_USER'] }}"
+        login_user: "{{ secret['DE_USER'] }}"
         login_password: "{{ secret['DB_PASS'] }}"
         port: "{{ secret['DB_PORT'] }}"
         db: events
