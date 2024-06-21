@@ -1,12 +1,11 @@
 ---
 - hosts: localhost
-  vars:
-    secret: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
-  tasks:    
-  - name: Show secret
-    debug:
-      msg: "{{ secret }}"
+  tasks:
+  - name: Getting local collection list
+    shell:
+      cmd: ansible-galaxy collection list
+    register: collection_list
 
-  - name: Show unique secret
+  - name: Printing collection
     debug:
-      msg: "{{ secret['DB_NAME'] }}"
+      msg: '{{ collection_list.stdout_lines }}'
