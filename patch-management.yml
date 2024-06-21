@@ -33,6 +33,10 @@
     secret: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
   tags: update_database
   tasks:
+    - name: Install psycopg 
+      pip:
+        name: psycopg2-binary==2.9.9
+        
     - name: Insert packages updatable on patch_management database
       postgresql_query:
         login_host: "{{ secret['DB_HOST'] }}"
