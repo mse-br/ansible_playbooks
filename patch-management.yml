@@ -31,8 +31,7 @@
   become: no
   vars:
     secret: "{{ lookup('aws_secret', 'UAT/PATCHREPORTING', region='us-east-1') }}"
-  tag:
-  - update_database
+  tags: update_database
   tasks:
     - name: Insert packages updatable on patch_management database
       postgresql_query:
