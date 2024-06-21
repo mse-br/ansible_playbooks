@@ -38,7 +38,7 @@
         login_host: "{{ secret['DB_HOST'] }}"
         login_user: "{{ secret['DE_USER'] }}"
         login_password: "{{ secret['DB_PASS'] }}"
-        port: "{{ secret['DB_PORT'] }}"
+        port: "{{ secret['DB_PORT '] }}"
         db: events
         query: INSERT INTO patch_management.raw_upgradable (configuration_item_sys_id, raw_upgradable) VALUES (%s, %s);
         positional_args:
