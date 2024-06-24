@@ -50,8 +50,3 @@
           - "{{ hostvars[item]['apt_upgrades']['stdout'] }}"
       register: query_result
       loop: "{{ groups['all'] }}"
-      
-    - name: Display insert result
-      debug:
-        var: "{{ item }}"
-      loop: "{{ query_result.result }}"
