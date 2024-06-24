@@ -47,7 +47,7 @@
         query: INSERT INTO patch_management.raw_upgradable (configuration_item_sys_id, raw_upgradable) VALUES (%s, %s);
         positional_args:
           - "{{ hostvars[item]['sys_id'] }}"
-          - "{{ hostvars[item]['apt_upgrades']['stdout_lines'] }}"
+          - "{{ hostvars[item]['apt_upgrades']['stdout'] }}"
       loop: "{{ groups['all'] }}"
       register: query_result
 
