@@ -49,8 +49,10 @@
           - "{{ hostvars[item]['sys_id'] }}"
           - "{{ hostvars[item]['apt_upgrades']['stdout'] }}"
       loop: "{{ groups['all'] }}"
+      loop_control:
+        loop_var: outer_item
       register: query_result
-
+      
     - name: Display insert result
       debug:
-        var: query_result.statusmessage
+        var: query_result[outer_item].statusmessage
